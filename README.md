@@ -63,6 +63,32 @@ Traditionally, determining an abalone's age requires:
    uv run pre-commit run --all-files
    ```
 
+### Running the training pipeline (Prefect)
+
+1. Start a local Prefect server (keeps a UI + history of flow runs):
+   ```bash
+   uv run prefect server start
+   ```
+   Leave this running, then open the UI at <http://127.0.0.1:4200>.
+
+2. In a second terminal, run the training flow once, ad hoc:
+   ```bash
+   uv run python src/modelling/main.py
+   ```
+   You'll see the run appear under **Flows** / **Flow Runs** in the UI.
+
+3. To set up the scheduled retraining deployment instead:
+   ```bash
+   uv run python src/modelling/deployment.py
+   ```
+   This registers the `abalone-retrain` deployment with a daily cron schedule
+   and keeps running to execute it. New runs show up automatically in the UI.
+
+4. To trigger the deployment manually (without waiting for the schedule):
+   ```bash
+   uv run prefect deployment run 'train-model-flow/abalone-retrain'
+   ```
+
 
 ## 📋 What You'll Build
 
