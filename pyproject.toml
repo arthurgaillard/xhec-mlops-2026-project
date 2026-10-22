@@ -8,16 +8,19 @@ version = "0.0.1"
 authors = [
   { name = "arthurgaillard", email = "arthur.gaillard@hec.edu" },
   { name = "TabErica", email = "ziqi.meng@hec.edu" },
-  { name = "Anais", email = "anais.storp@hec.edu" },
+  { name = "AnaisStorp", email = "anais.storp@hec.edu" },
+  { name = "coasensi", email = "charles.odend-hal@hec.edu" }
 ]
 description = "X-HEC MLOps Project on Abalone age prediction model"
-requires-python = ">3.10" # TODO: update this version
+requires-python = ">=3.11"
 dependencies = [
+    "fastapi>=0.150.0",
     "kagglehub>=1.0.2",
     "pandas>=2.3.3",
-    "prefect>=3.8.8",
+    "prefect>=3.9.0",
     "pydantic>=2.14.1",
     "scikit-learn>=1.7.2",
+    "uvicorn>=0.54.0",
 ]
 
 [dependency-groups]
