@@ -2,12 +2,14 @@
 
 import numpy as np
 import scipy.sparse
+from prefect import task
 from sklearn.base import RegressorMixin
 from sklearn.ensemble import RandomForestRegressor
 
 RANDOM_STATE = 42
 
 
+@task
 def train_model(
     x_train: scipy.sparse.csr_matrix,
     y_train: np.ndarray,
