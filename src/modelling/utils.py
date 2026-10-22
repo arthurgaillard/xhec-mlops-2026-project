@@ -3,7 +3,10 @@ import pickle
 from pathlib import Path
 from typing import Any
 
+from prefect import task
 
+
+@task
 def pickle_object(obj: Any, file_path: str) -> None:
     """Save a python object to a file using pickle"""
     path = Path(file_path)

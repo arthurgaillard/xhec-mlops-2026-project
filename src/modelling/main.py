@@ -1,10 +1,10 @@
 # This module is the training flow: it reads the data, preprocesses it, trains a model and saves it.
 
-import argparse
 from pathlib import Path
 
 from predicting import evaluate_model, predict_rings
-from preprocessing import extract_x_y, filter_outliers, load_data
+from prefect import flow
+from preprocessing import extract_x_y, fetch_data, filter_outliers, load_data
 from sklearn.model_selection import train_test_split
 from training import RANDOM_STATE, train_model
 from utils import pickle_object
@@ -17,9 +17,11 @@ MODEL_PATH = LOCAL_OBJECTS_DIR / "model.pkl"
 DV_PATH = LOCAL_OBJECTS_DIR / "dv.pkl"
 
 
-def main(trainset_path: Path) -> None:
-    """Train a model using the data at the given path and save the model (pickle)."""
-    # Read data
+@flow(name="train-model-flow", log_prints=True)
+def train_model_flow() -> None:
+    """Fetch the data, preprocess it, train a model and save it (pickle)."""
+    # Fetch and read data
+    trainset_path = fetch_data()
     df = filter_outliers(load_data(trainset_path))
     train_df, test_df = train_test_split(
         df, test_size=TEST_SIZE, random_state=RANDOM_STATE
@@ -42,9 +44,4 @@ def main(trainset_path: Path) -> None:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Train a model using the data at the given path."
-    )
-    parser.add_argument("trainset_path", type=str, help="Path to the training set")
-    args = parser.parse_args()
-    main(Path(args.trainset_path))
+    train_model_flow()

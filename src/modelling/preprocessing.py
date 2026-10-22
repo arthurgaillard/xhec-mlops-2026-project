@@ -2,9 +2,11 @@
 
 from pathlib import Path
 
+import kagglehub
 import numpy as np
 import pandas as pd
 import scipy.sparse
+from prefect import task
 from sklearn.feature_extraction import DictVectorizer
 
 TARGET = "Rings"
@@ -22,11 +24,20 @@ MIN_HEIGHT = 0
 MAX_HEIGHT = 0.4
 
 
+@task
+def fetch_data() -> Path:
+    """Download the Abalone dataset from Kaggle and return the path to the CSV."""
+    dataset_path = kagglehub.dataset_download("rodolfomendes/abalone-dataset")
+    return Path(dataset_path) / "abalone.csv"
+
+
+@task
 def load_data(path: Path) -> pd.DataFrame:
     """Load the Abalone dataset from a CSV file."""
     return pd.read_csv(path)
 
 
+@task
 def filter_outliers(
     df: pd.DataFrame, min_height: float = MIN_HEIGHT, max_height: float = MAX_HEIGHT
 ) -> pd.DataFrame:
@@ -36,6 +47,7 @@ def filter_outliers(
     )
 
 
+@task
 def extract_x_y(
     df: pd.DataFrame,
     categorical_cols: list[str] | None = None,
