@@ -31,7 +31,7 @@ def train_model_flow() -> None:
     x_train, y_train, dv = extract_x_y(train_df)
     x_test, y_test, _ = extract_x_y(test_df, dv=dv)
 
-    # (Optional) Pickle encoder if need be
+    # Pickle encoder
     pickle_object(dv, DV_PATH)
 
     # Train model
@@ -39,7 +39,7 @@ def train_model_flow() -> None:
     test_rmse = evaluate_model(y_test, predict_rings(x_test, model))
     print(f"Test RMSE: {test_rmse:.2f}")
 
-    # Pickle model --> The model should be saved in pkl format the `src/web_service/local_objects` folder
+    # Pickle model (loaded by the API in src/web_service)
     pickle_object(model, MODEL_PATH)
 
 

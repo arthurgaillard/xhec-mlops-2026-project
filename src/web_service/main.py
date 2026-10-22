@@ -1,4 +1,4 @@
-# Code with FastAPI (app = FastAPI(...))
+# This module defines the FastAPI app serving the abalone age predictions.
 
 from pathlib import Path
 
@@ -23,6 +23,7 @@ model = load_object(MODEL_PATH)
 
 @app.get("/")
 def home() -> dict:
+    """Health check: confirm that the API is running."""
     return {"health_check": "App up and running!"}
 
 

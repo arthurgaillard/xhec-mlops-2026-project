@@ -9,7 +9,7 @@ authors = [
   { name = "arthurgaillard", email = "arthur.gaillard@hec.edu" },
   { name = "TabErica", email = "ziqi.meng@hec.edu" },
   { name = "AnaisStorp", email = "anais.storp@hec.edu" },
-  { name = "coasensi", email = "charles.odend-hal@hec.edu" }
+  { name = "coasensi", email = "charles.odend-hal@hec.edu" },
 ]
 description = "X-HEC MLOps Project on Abalone age prediction model"
 requires-python = ">=3.11"

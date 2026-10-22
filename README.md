@@ -14,7 +14,7 @@
 | Arthur Gaillard | [@arthurgaillard](https://github.com/arthurgaillard) |
 | Ziqi Meng | [@TabErica](https://github.com/TabErica) |
 | Anaïs Storp | [@AnaisStorp](https://github.com/AnaisStorp) |
-| Charles | [@coasensi](https://github.com/coasensi) |
+| Charles Odend'hal | [@coasensi](https://github.com/coasensi) |
 
 ## 🎯 Project Overview
 
