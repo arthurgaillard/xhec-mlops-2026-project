@@ -1,4 +1,4 @@
-# Use this module to code a `pickle_object` function. This will be useful to pickle the model (and encoder if need be).
+# This module contains the functions to save and load python objects (model, encoder) with pickle.
 import pickle
 from pathlib import Path
 from typing import Any
