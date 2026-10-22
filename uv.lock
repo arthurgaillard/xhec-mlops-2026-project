@@ -7300,6 +7300,8 @@ name = "xhec-mlops-project-student"
 version = "0.0.1"
 source = { editable = "." }
 dependencies = [
+    { name = "kagglehub", version = "1.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "kagglehub", version = "1.0.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pandas", version = "2.3.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "pandas", version = "3.0.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "prefect", version = "3.8.8", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
@@ -7313,8 +7315,6 @@ dependencies = [
 dev = [
     { name = "ipykernel", version = "7.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "ipykernel", version = "7.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "kagglehub", version = "1.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "kagglehub", version = "1.0.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "matplotlib", version = "3.10.9", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "matplotlib", version = "3.11.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "mlflow" },
@@ -7327,6 +7327,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "kagglehub", specifier = ">=1.0.2" },
     { name = "pandas", specifier = ">=2.3.3" },
     { name = "prefect", specifier = ">=3.8.8" },
     { name = "pydantic", specifier = ">=2.14.1" },
@@ -7336,7 +7337,6 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "ipykernel", specifier = ">=7.3.0" },
-    { name = "kagglehub", specifier = ">=1.0.2" },
     { name = "matplotlib", specifier = ">=3.10.9" },
     { name = "mlflow", specifier = ">=3.17.2" },
     { name = "pre-commit", specifier = ">=4.6.2" },
