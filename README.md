@@ -17,7 +17,7 @@ Welcome to your MLOps project! In this hands-on project, you'll build a complete
 
 Traditionally, determining an abalone's age requires:
 1. Cutting the shell through the cone
-2. Staining it 
+2. Staining it
 3. Counting rings under a microscope (very time-consuming!)
 
 **Your Goal**: Use easier-to-obtain physical measurements (shell weight, diameter, etc.) to predict the age automatically.
@@ -34,27 +34,67 @@ Traditionally, determining an abalone's age requires:
 
 ### Setup Steps
 
-1. **Fork this repository** 
+1. **Fork this repository**
    - ⚠️ **Important**: Uncheck "Copy the `main` branch only" to get all project branches
-   
+
 2. **Add your team members** as admins to your forked repository
 
 3. **Set up your development environment**:
-   ```bash
-   # Create and activate a virtual environment
-   uv sync 
-   source venv/bin/activate # on Windows: venv\Scripts\activate
+3. **Set up your development environment**:
 
-   # Install pre-commit hooks for code quality
-    uv pip install pre-commit
-    uv run pre-commit install
+   Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if you don't have it:
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh   # macOS / Linux
    ```
+
+   Create the virtual environment and install all dependencies (app + dev):
+   ```bash
+   uv sync
+   source .venv/bin/activate   # on Windows: .venv\Scripts\activate
+   ```
+
+   Install the pre-commit hooks (ruff linting/formatting and file checks run on every commit):
+   ```bash
+   uv run pre-commit install
+   ```
+
+   Optionally, run all hooks once on the whole codebase:
+   ```bash
+   uv run pre-commit run --all-files
+   ```
+
+### Running the training pipeline (Prefect)
+
+1. Start a local Prefect server (keeps a UI + history of flow runs):
+   ```bash
+   uv run prefect server start
+   ```
+   Leave this running, then open the UI at <http://127.0.0.1:4200>.
+
+2. In a second terminal, run the training flow once, ad hoc:
+   ```bash
+   uv run python src/modelling/main.py
+   ```
+   You'll see the run appear under **Flows** / **Flow Runs** in the UI.
+
+3. To set up the scheduled retraining deployment instead:
+   ```bash
+   uv run python src/modelling/deployment.py
+   ```
+   This registers the `abalone-retrain` deployment with a daily cron schedule
+   and keeps running to execute it. New runs show up automatically in the UI.
+
+4. To trigger the deployment manually (without waiting for the schedule):
+   ```bash
+   uv run prefect deployment run 'train-model-flow/abalone-retrain'
+   ```
+
 
 ## 📋 What You'll Build
 
 By the end of this project, you'll have created:
 
-### 🤖 **Automated ML Pipeline** 
+### 🤖 **Automated ML Pipeline**
 - Training workflows using Prefect
 - Automatic model retraining on schedule
 - Reproducible model and data processing
@@ -67,7 +107,7 @@ By the end of this project, you'll have created:
 ### 📊 **Production-Ready Code**
 - Clean, well-documented code
 - Automated testing and formatting
-- Proper error handling 
+- Proper error handling
 
 ## 📝 How to Work on This Project
 
@@ -102,7 +142,7 @@ git push
 
 Then:
 1. 📖 Read the PR_i.md file carefully
-2. 💻 Complete all the TODOs in the code  
+2. 💻 Complete all the TODOs in the code
 3. 🔧 Test your changes
 4. 📤 Open **ONE** pull request to your main branch
 5. ✅ Merge the pull request
@@ -147,16 +187,16 @@ uv sync
 
 Your project will be evaluated on:
 
-### 🔍 **Code Quality** 
+### 🔍 **Code Quality**
 - Clean, readable code structure
-- Proper naming conventions  
+- Proper naming conventions
 - Good use of docstrings and type hints
 
 ### 🎨 **Code Formatting**
 - Consistent style (automated with pre-commit)
 - Professional presentation
 
-### ⚙️ **Functionality** 
+### ⚙️ **Functionality**
 - Code runs without errors
 - All requirements implemented correctly
 
@@ -177,10 +217,10 @@ When you're done, your repository should contain:
 
 ✅ **Automated Training Pipeline**
 - [ ] Prefect workflows for model training
-- [ ] Separate modules for training and inference  
+- [ ] Separate modules for training and inference
 - [ ] Reproducible model and encoder generation
 
-✅ **Automated Deployment**  
+✅ **Automated Deployment**
 - [ ] Prefect deployment for regular retraining
 
 ✅ **Production API**
