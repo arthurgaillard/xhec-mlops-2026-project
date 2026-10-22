@@ -3,8 +3,8 @@
 from pathlib import Path
 
 from predicting import evaluate_model, predict_rings
-from preprocessing import extract_x_y, fetch_data, filter_outliers, load_data
 from prefect import flow
+from preprocessing import extract_x_y, fetch_data, filter_outliers, load_data
 from sklearn.model_selection import train_test_split
 from training import RANDOM_STATE, train_model
 from utils import pickle_object
